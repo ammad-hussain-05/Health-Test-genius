@@ -34,3 +34,4 @@ firebase-debug.log
 .firebaserc
 firebase.json
 .firestore/
+.angular/cache/ 
