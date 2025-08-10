@@ -1,0 +1,171 @@
+<nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 border-b border-gray-200">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <img src="assets/images/logo.png" alt="Health Test Genius" style="width: 70px;">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <div 
+          *ngFor="let item of menuItems" 
+          class="relative group"
+          (mouseenter)="activeDropdown = item.label"
+          (mouseleave)="closeDropdowns()"
+        >
+          <a 
+            [href]="item.link || '#'"
+            class="text-gray-700 hover:text-blue-600 font-medium py-2 px-1 transition-colors duration-200 flex items-center"
+            [class.text-blue-600]="activeDropdown === item.label"
+          >
+            {{ item.label }}
+            <i 
+              *ngIf="item.children" 
+              class="fas fa-chevron-down ml-1 transition-transform duration-200"
+              [class.rotate-180]="activeDropdown === item.label"
+            ></i>
+          </a>
+
+          <!-- Desktop Dropdown -->
+          <div 
+            *ngIf="item.children && activeDropdown === item.label"
+            class="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
+          >
+            <div *ngFor="let child of item.children" class="relative group/submenu">
+              <a 
+                [href]="child.link || '#'"
+                class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 flex items-center justify-between"
+              >
+                {{ child.label }}
+                <i 
+                  *ngIf="child.children" 
+                  class="fas fa-chevron-right"
+                ></i>
+              </a>
+
+              <!-- Sub-submenu -->
+              <div 
+                *ngIf="child.children"
+                class="absolute left-full top-0 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 opacity-0 invisible group-hover/submenu:opacity-100 group-hover/submenu:visible transition-all duration-200"
+              >
+                <div *ngFor="let grandchild of child.children">
+                  <a 
+                    [href]="grandchild.link || '#'"
+                    class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                  >
+                    {{ grandchild.label }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <!-- <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
+          Book Now
+        </button> -->
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        class="lg:hidden relative w-8 h-8 flex flex-col justify-center items-center space-y-1 group"
+        (click)="toggleMobileMenu()"
+        [class.open]="isMobileMenuOpen"
+      >
+        <div class="hamburger-line w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out group-hover:bg-blue-600"
+             [ngClass]="{'rotate-45 translate-y-2': isMobileMenuOpen}"></div>
+        <div class="hamburger-line w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out group-hover:bg-blue-600"
+             [ngClass]="{'opacity-0': isMobileMenuOpen}"></div>
+        <div class="hamburger-line w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out group-hover:bg-blue-600"
+             [ngClass]="{'-rotate-45 -translate-y-2': isMobileMenuOpen}"></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+    [class.active]="isMobileMenuOpen"
+    (click)="closeMobileMenu()"
+  ></div>
+
+  <!-- Mobile Menu Panel -->
+  <div 
+    class="mobile-menu-panel fixed top-0 right-0 h-full w-80 bg-white z-50 transform transition-all duration-300 ease-in-out shadow-2xl lg:hidden"
+    [class.active]="isMobileMenuOpen"
+  >
+    <div class="p-6 h-full overflow-y-auto">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Menu</h2>
+        <button 
+          class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-blue-600 transition-all duration-300 hover:rotate-90"
+          (click)="closeMobileMenu()"
+        >
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div class="menu-sections">
+        <div *ngFor="let item of menuItems" class="menu-section mb-6">
+          <div class="flex items-center justify-between">
+            <a 
+              [href]="item.link || '#'"
+              class="font-semibold text-gray-800 text-lg flex-1"
+              (click)="item.children ? null : closeMobileMenu()"
+            >
+              {{ item.label }}
+            </a>
+            <button 
+              *ngIf="item.children"
+              (click)="toggleDropdown(item.label)"
+              class="p-2 text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              <i 
+                class="fas fa-chevron-down transition-transform duration-200"
+                [class.rotate-180]="activeDropdown === item.label"
+              ></i>
+            </button>
+          </div>
+          
+          <div 
+            *ngIf="item.children && activeDropdown === item.label"
+            class="mt-3 ml-4 space-y-2 border-l-2 border-blue-100 pl-4"
+          >
+            <div *ngFor="let child of item.children">
+              <a 
+                [href]="child.link || '#'"
+                class="block text-gray-600 hover:text-blue-600 transition-colors py-1"
+                (click)="child.children ? null : closeMobileMenu()"
+              >
+                {{ child.label }}
+              </a>
+              <div 
+                *ngIf="child.children"
+                class="ml-4 mt-2 space-y-1 border-l border-gray-200 pl-3"
+              >
+                <a 
+                  *ngFor="let grandchild of child.children"
+                  [href]="grandchild.link || '#'"
+                  class="block text-gray-500 hover:text-blue-600 transition-colors text-sm py-1"
+                  (click)="closeMobileMenu()"
+                >
+                  {{ grandchild.label }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- <div class="pt-6 border-t border-gray-200">
+          <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
+            Book Now
+          </button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</nav> 

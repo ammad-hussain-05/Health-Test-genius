@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Health Test Guru - Compare Health Tests & Book Healthcare Services</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare health tests, find the best prices, and book trusted healthcare services near you. GP appointments, blood tests, cancer checks, and more.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  
+  <!-- Font - Optimized for speed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CSS -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  
+  <!-- FontAwesome Font Preloading -->
+  <link rel="preload" href="assets/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=     &callback=initGoogleMaps"></script>
+  
+  <!-- Google Maps Callback -->
+  <script>
+    window.googleMapsLoaded = false;
+    window.googleMapsCallbacks = [];
+    
+    function initGoogleMaps() {
+      window.googleMapsLoaded = true;
+      window.googleMapsCallbacks.forEach(callback => {
+        try {
+          callback();
+        } catch (error) {
+          console.error('Error in Google Maps callback:', error);
+        }
+      });
+      window.googleMapsCallbacks = [];
+    }
+    
+    window.addGoogleMapsCallback = function(callback) {
+      if (window.googleMapsLoaded) {
+        callback();
+      } else {
+        window.googleMapsCallbacks.push(callback);
+      }
+    };
+  </script>
+</head>
+<body class="font-sans">
+  <app-root></app-root>
+</body>
+</html>

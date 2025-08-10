@@ -1,0 +1,313 @@
+{
+  "services": [
+    {
+      "id": "blood-test",
+      "name": "Blood Test",
+      "description": "Comprehensive blood analysis including full blood count, cholesterol, diabetes markers, and vitamin levels",
+      "price": "£39.00",
+      "delivery": ["At Home", "In Clinic"],
+      "category": "Blood Tests",
+      "subcategories": [
+        {
+          "id": "general-health",
+          "name": "General Health",
+          "description": "Complete health screening including cholesterol, diabetes, kidney and liver function",
+          "price": "£115.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "cholesterol",
+          "name": "Cholesterol",
+          "description": "Complete cholesterol panel including HDL, LDL, and triglycerides",
+          "price": "£39.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "diabetes",
+          "name": "Diabetes",
+          "description": "HbA1c test to monitor diabetes and pre-diabetes",
+          "price": "£29.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "thyroid",
+          "name": "Thyroid",
+          "description": "TSH, T3, T4, and thyroid antibodies assessment",
+          "price": "£89.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "vitamins",
+          "name": "Vitamins",
+          "description": "Vitamin D, B12, folate and essential vitamin testing",
+          "price": "£45.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "female-fertility",
+          "name": "Female Fertility",
+          "description": "AMH, FSH, LH, and oestradiol testing for fertility assessment",
+          "price": "£149.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "male-fertility",
+          "name": "Male Fertility",
+          "description": "Testosterone, FSH, LH testing for male fertility assessment",
+          "price": "£129.00",
+          "delivery": ["At Home", "In Clinic"]
+        }
+      ]
+    },
+    {
+      "id": "sti-test",
+      "name": "STI Test",
+      "description": "Comprehensive sexual health screening for sexually transmitted infections",
+      "price": "£65.00",
+      "delivery": ["At Home", "In Clinic"],
+      "category": "Sexual Health",
+      "subcategories": [
+        {
+          "id": "full-sti-screen",
+          "name": "Full STI Screen",
+          "description": "Complete screening for Chlamydia, Gonorrhoea, HIV, Syphilis, Hepatitis B&C",
+          "price": "£159.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "chlamydia-gonorrhoea",
+          "name": "Chlamydia & Gonorrhoea",
+          "description": "Rapid urine test for the two most common STIs",
+          "price": "£89.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "hiv-test",
+          "name": "HIV Test",
+          "description": "4th generation HIV test detecting infection from 4 weeks",
+          "price": "£65.00",
+          "delivery": ["At Home", "In Clinic"]
+        }
+      ]
+    },
+    {
+      "id": "gp-appointment",
+      "name": "GP Appointment",
+      "description": "Professional GP consultation for health concerns and medical advice",
+      "price": "£120.00",
+      "delivery": ["In Clinic", "Virtual"],
+      "category": "GP Services",
+      "subcategories": [
+        {
+          "id": "in-person",
+          "name": "In-Person Consultation",
+          "description": "Face-to-face GP appointment at clinic",
+          "price": "£120.00",
+          "delivery": ["In Clinic"]
+        },
+        {
+          "id": "virtual",
+          "name": "Virtual Consultation",
+          "description": "Online GP appointment via video call",
+          "price": "£95.00",
+          "delivery": ["Virtual"]
+        }
+      ]
+    },
+    {
+      "id": "cancer-check",
+      "name": "Cancer Check",
+      "description": "Early detection cancer screening tests for various cancer types",
+      "price": "£79.00",
+      "delivery": ["In Clinic"],
+      "category": "Cancer Screening",
+      "subcategories": [
+        {
+          "id": "bowel-cancer",
+          "name": "Bowel Cancer",
+          "description": "FIT test for early bowel cancer detection",
+          "price": "£79.00",
+          "delivery": ["At Home", "In Clinic"]
+        },
+        {
+          "id": "breast-cancer",
+          "name": "Breast Cancer",
+          "description": "Mammography and breast examination",
+          "price": "£195.00",
+          "delivery": ["In Clinic"]
+        },
+        {
+          "id": "prostate-cancer",
+          "name": "Prostate Cancer",
+          "description": "PSA blood test and digital examination",
+          "price": "£89.00",
+          "delivery": ["In Clinic"]
+        }
+      ]
+    },
+    {
+      "id": "ct-scan",
+      "name": "CT Scan",
+      "description": "Advanced CT imaging for detailed internal body examination",
+      "price": "£495.00",
+      "delivery": ["In Clinic"],
+      "category": "Medical Imaging",
+      "subcategories": [
+        {
+          "id": "full-body",
+          "name": "Full Body CT",
+          "description": "Complete body CT scan for comprehensive health check",
+          "price": "£995.00",
+          "delivery": ["In Clinic"]
+        },
+        {
+          "id": "chest-ct",
+          "name": "Chest CT",
+          "description": "Detailed chest and lung CT imaging",
+          "price": "£495.00",
+          "delivery": ["In Clinic"]
+        },
+        {
+          "id": "abdominal-ct",
+          "name": "Abdominal CT",
+          "description": "Abdominal and pelvic CT imaging",
+          "price": "£525.00",
+          "delivery": ["In Clinic"]
+        }
+      ]
+    },
+    {
+      "id": "mri-scan",
+      "name": "MRI Scan",
+      "description": "High-resolution MRI scans for comprehensive diagnostic imaging",
+      "price": "£695.00",
+      "delivery": ["In Clinic"],
+      "category": "Medical Imaging",
+      "subcategories": [
+        {
+          "id": "brain-mri",
+          "name": "Brain MRI",
+          "description": "Detailed brain and head MRI imaging",
+          "price": "£695.00",
+          "delivery": ["In Clinic"]
+        },
+        {
+          "id": "spine-mri",
+          "name": "Spine MRI",
+          "description": "Spinal column MRI for back problems",
+          "price": "£695.00",
+          "delivery": ["In Clinic"]
+        },
+        {
+          "id": "joint-mri",
+          "name": "Joint MRI",
+          "description": "Knee, shoulder or other joint MRI",
+          "price": "£595.00",
+          "delivery": ["In Clinic"]
+        }
+      ]
+    }
+  ],
+  "providers": {
+    "at-home": [
+      {
+        "id": "medichecks",
+        "name": "Medichecks",
+        "location": "Home Collection Service",
+        "distance": "Nationwide",
+        "rating": 4.8,
+        "reviews": 15432,
+        "price_modifier": 1.0,
+        "features": ["Same Day Collection", "Online Results", "GP Review Included", "Free Home Kit"],
+        "availability": ["Today", "Tomorrow", "This Week"],
+        "logo": "medichecks-logo.png"
+      },
+      {
+        "id": "thriva",
+        "name": "Thriva",
+        "location": "Home Collection Service",
+        "distance": "Nationwide",
+        "rating": 4.7,
+        "reviews": 12876,
+        "price_modifier": 1.1,
+        "features": ["Easy Home Kit", "Fast Results", "Health Dashboard", "Expert Advice"],
+        "availability": ["Tomorrow", "This Week"],
+        "logo": "thriva-logo.png"
+      },
+      {
+        "id": "superdrug-health",
+        "name": "Superdrug Health",
+        "location": "Home Collection Service",
+        "distance": "Nationwide",
+        "rating": 4.6,
+        "reviews": 8923,
+        "price_modifier": 0.9,
+        "features": ["Budget Friendly", "Reliable Service", "Quick Delivery", "Pharmacy Support"],
+        "availability": ["This Week", "Next Week"],
+        "logo": "superdrug-logo.png"
+      }
+    ],
+    "in-clinic": [
+      {
+        "id": "doctors-lab",
+        "name": "The Doctors Laboratory",
+        "location": "London Bridge, London",
+        "distance": "0.8 miles",
+        "rating": 4.9,
+        "reviews": 28474,
+        "price_modifier": 0.8,
+        "features": ["Same Day Results", "NHS Approved", "Walk-in Available", "Expert Staff"],
+        "availability": ["Today", "Tomorrow", "This Week"],
+        "logo": "tdl-logo.png"
+      },
+      {
+        "id": "nuffield-health",
+        "name": "Nuffield Health",
+        "location": "Harley Street, London",
+        "distance": "2.1 miles",
+        "rating": 4.7,
+        "reviews": 14563,
+        "price_modifier": 1.5,
+        "features": ["Premium Service", "Consultant Review", "Comprehensive Reports", "Follow-up Included"],
+        "availability": ["This Week", "Next Week"],
+        "logo": "nuffield-logo.png"
+      },
+      {
+        "id": "bupa-health",
+        "name": "Bupa Health Clinics",
+        "location": "Canary Wharf, London",
+        "distance": "1.2 miles",
+        "rating": 4.8,
+        "reviews": 19234,
+        "price_modifier": 1.3,
+        "features": ["Premium Facilities", "Experienced Staff", "Fast Results", "Insurance Accepted"],
+        "availability": ["Tomorrow", "This Week"],
+        "logo": "bupa-logo.png"
+      },
+      {
+        "id": "london-medical",
+        "name": "London Medical Laboratory",
+        "location": "Kensington, London",
+        "distance": "1.7 miles",
+        "rating": 4.9,
+        "reviews": 9876,
+        "price_modifier": 1.1,
+        "features": ["Quick Turnaround", "Certified Lab", "Digital Results", "Expert Analysis"],
+        "availability": ["Today", "Tomorrow"],
+        "logo": "lml-logo.png"
+      },
+      {
+        "id": "private-blood-tests",
+        "name": "Private Blood Tests UK",
+        "location": "Westminster, London",
+        "distance": "3.4 miles",
+        "rating": 4.6,
+        "reviews": 21345,
+        "price_modifier": 0.7,
+        "features": ["Budget Friendly", "Multiple Locations", "Reliable Results", "No Appointment Needed"],
+        "availability": ["Today", "Tomorrow", "This Week"],
+        "logo": "pbt-logo.png"
+      }
+    ]
+  }
+} 

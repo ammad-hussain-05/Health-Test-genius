@@ -1,0 +1,340 @@
+/* Hero component specific styles */
+
+/* Hamburger Menu Lines Animation */
+/* .hamburger-line {
+  transform-origin: center;
+}
+
+
+.mobile-menu-overlay {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(4px);
+}
+
+.mobile-menu-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Mobile Menu Panel with exact animations */
+/* .mobile-menu-panel {
+  transform: translateX(100%) translateY(-10px) rotateY(-20deg);
+  opacity: 0;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-panel.active {
+  transform: translateX(0) translateY(0) rotateY(0deg);
+  opacity: 1;
+}
+
+.menu-section {
+  opacity: 0;
+  transform: translateX(30px) translateY(20px);
+  animation: slideInMenuSection 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.menu-section:nth-child(1) { animation-delay: 0.1s; }
+.menu-section:nth-child(2) { animation-delay: 0.2s; }
+.menu-section:nth-child(3) { animation-delay: 0.3s; }
+.menu-section:nth-child(4) { animation-delay: 0.4s; }
+.menu-section:nth-child(5) { animation-delay: 0.5s; } 
+
+@keyframes slideInMenuSection {
+  0% {
+    opacity: 0;
+    transform: translateX(30px) translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+.menu-section a {
+  display: block;
+  padding: 8px 0;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.menu-section a::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%) scaleX(0);
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+.menu-section a:hover::before {
+  transform: translateY(-50%) scaleX(1);
+}
+
+.menu-section a:hover {
+  padding-left: 12px;
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+
+.menu-section h3 {
+  position: relative;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.menu-section h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 1px;
+}
+  */
+
+
+
+
+
+  /* Background & Text */
+.hero-section {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  padding: 100px 0;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.8) 0%, rgba(53, 122, 189, 0.9) 100%);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+  padding: 40px 20px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.hero-search {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.hero-search input {
+  padding: 1rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.5rem;
+  border: none;
+  color: #1e293b;
+  font-size: 1rem;
+  outline: none;
+}
+
+.hero-search button {
+  background-color: #22c55e;
+  color: white;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+
+.hero-search button:hover {
+  background-color: #16a34a;
+}
+
+/* Navbar */
+.navbar.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  z-index: 50;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+/* Hamburger */
+.hamburger-menu {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  height: 3px;
+  background: #4b5563;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.hamburger-menu.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.hamburger-menu.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+}
+
+/* Mobile Menu */
+.mobile-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 300px;
+  height: 100%;
+  background: white;
+  z-index: 50;
+  transition: right 0.5s ease;
+  overflow-y: auto;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.2);
+}
+
+.mobile-panel.active {
+  right: 0;
+}
+
+.mobile-panel-content {
+  padding: 2rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.panel-header h2 {
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.close-btn {
+  font-size: 2rem;
+  color: #4b5563;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(90deg);
+  color: #2563eb;
+}
+
+/* Menu Sections */
+.menu-section {
+  margin-bottom: 1.5rem;
+}
+
+.menu-section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.menu-section ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.menu-section ul li a {
+  color: #4b5563;
+  text-decoration: none;
+  display: block;
+  padding: 0.25rem 0;
+  transition: 0.3s;
+}
+
+.menu-section ul li a:hover {
+  color: #2563eb;
+}

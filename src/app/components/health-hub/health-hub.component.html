@@ -1,0 +1,355 @@
+<!-- Enhanced Health Hub Page -->
+<div class="health-hub-page">
+  
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <div class="floating-elements">
+        <i class="floating-icon fas fa-heartbeat" style="top: 10%; left: 10%; animation-delay: 0s;"></i>
+        <i class="floating-icon fas fa-stethoscope" style="top: 20%; right: 15%; animation-delay: 1s;"></i>
+        <i class="floating-icon fas fa-pills" style="bottom: 30%; left: 20%; animation-delay: 2s;"></i>
+        <i class="floating-icon fas fa-user-md" style="bottom: 20%; right: 10%; animation-delay: 3s;"></i>
+        <i class="floating-icon fas fa-microscope" style="top: 50%; left: 5%; animation-delay: 4s;"></i>
+        <i class="floating-icon fas fa-dna" style="top: 60%; right: 5%; animation-delay: 5s;"></i>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-star"></i>
+          <span>Your Trusted Health Resource</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Your Complete
+          <span class="highlight-text">Health Hub</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Discover expert health insights, latest medical research, and personalized wellness guidance 
+          from trusted healthcare professionals. Your journey to better health starts here.
+        </p>
+        
+        <div class="hero-features">
+          <div class="hero-feature">
+            <div class="feature-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="feature-text">
+              <div class="feature-title">Expert Articles</div>
+              <div class="feature-desc">Written by certified doctors</div>
+            </div>
+          </div>
+          
+          <div class="hero-feature">
+            <div class="feature-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="feature-text">
+              <div class="feature-title">Daily Updates</div>
+              <div class="feature-desc">Fresh content every day</div>
+            </div>
+          </div>
+          
+          <div class="hero-feature">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="feature-text">
+              <div class="feature-title">Verified Info</div>
+              <div class="feature-desc">Medically reviewed content</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-actions">
+          <button class="btn-primary" (click)="scrollToArticles()">
+            <i class="fas fa-book-open"></i>
+            Explore Articles
+          </button>
+          <button class="btn-secondary" (click)="scrollToCategories()">
+            <i class="fas fa-th-large"></i>
+            Browse Categories
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-wrapper">
+        <div class="search-box">
+          <div class="search-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search health topics, conditions, treatments..."
+            (keyup.enter)="onSearch()"
+          >
+          <button class="search-btn" (click)="onSearch()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        
+        <div class="filter-tags">
+          <span class="filter-label">Popular:</span>
+          <span class="filter-tag" (click)="filterByCategory('Heart Health')">Heart Health</span>
+          <span class="filter-tag" (click)="filterByCategory('Mental Health')">Mental Health</span>
+          <span class="filter-tag" (click)="filterByCategory('Nutrition')">Nutrition</span>
+          <span class="filter-tag" (click)="filterByCategory('Prevention')">Prevention</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Section -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Articles</h2>
+        <p class="section-subtitle">
+          Hand-picked articles from our medical experts covering the latest in health and wellness
+        </p>
+      </div>
+      
+      <div class="featured-grid">
+        <article class="featured-main" *ngIf="latestArticles.length > 0">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i [class]="latestArticles[0].icon"></i>
+            </div>
+            <div class="article-badge">Featured</div>
+          </div>
+          
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category">{{ latestArticles[0].category }}</span>
+              <div class="read-time">
+                <i class="fas fa-clock"></i>
+                <span>{{ latestArticles[0].readTime }}</span>
+              </div>
+            </div>
+            
+            <h3 class="article-title">{{ latestArticles[0].title }}</h3>
+            <p class="article-excerpt">{{ latestArticles[0].excerpt }}</p>
+            
+            <div class="article-footer">
+              <div class="author-info">
+                <div class="author-avatar">
+                  {{ latestArticles[0].author.charAt(0) }}
+                </div>
+                <div class="author-details">
+                  <div class="author-name">{{ latestArticles[0].author }}</div>
+                  <div class="publish-date">{{ latestArticles[0].date }}</div>
+                </div>
+              </div>
+              
+              <button class="read-more-btn" (click)="readArticle(latestArticles[0])">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+        
+        <div class="featured-secondary">
+          <article 
+            class="secondary-article" 
+            *ngFor="let article of latestArticles.slice(1, 4); trackBy: trackByArticle"
+          >
+            <div class="secondary-image">
+              <div class="image-placeholder-small">
+                <i [class]="article.icon"></i>
+              </div>
+            </div>
+            
+            <div class="secondary-content">
+              <span class="category">{{ article.category }}</span>
+              <h4 class="secondary-title">{{ article.title }}</h4>
+              <p class="secondary-excerpt">{{ article.excerpt.substring(0, 80) }}...</p>
+              <div class="secondary-meta">
+                <span>{{ article.author }}</span>
+                <span>{{ article.readTime }}</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section class="latest-section" id="articles">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Latest Articles</h2>
+        <p class="section-subtitle">
+          Stay updated with the latest health insights and medical breakthroughs
+        </p>
+      </div>
+      
+      <div class="articles-grid">
+        <article 
+          class="article-card" 
+          *ngFor="let article of latestArticles; trackBy: trackByArticle"
+        >
+          <div class="card-image">
+            <div class="image-placeholder">
+              <i [class]="article.icon"></i>
+            </div>
+            <span class="card-category">{{ article.category }}</span>
+          </div>
+          
+          <div class="card-content">
+            <h3 class="card-title">{{ article.title }}</h3>
+            <p class="card-excerpt">{{ article.excerpt }}</p>
+            
+            <div class="card-meta">
+              <div class="author-info">
+                <i class="fas fa-user"></i>
+                <span>{{ article.author }}</span>
+              </div>
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> {{ article.readTime }}</span>
+                <span><i class="fas fa-calendar"></i> {{ article.date }}</span>
+              </div>
+            </div>
+            
+            <button class="card-btn" (click)="readArticle(article)">
+              <span>Read Article</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+      </div>
+      
+      <div class="load-more-section">
+        <button class="load-more-btn" (click)="loadMoreArticles()">
+          <span>Load More Articles</span>
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Health Categories</h2>
+        <p class="section-subtitle">
+          Explore our comprehensive collection of health topics organized by specialty
+        </p>
+      </div>
+      
+      <div class="categories-grid">
+        <div 
+          class="category-card" 
+          *ngFor="let category of healthCategories; trackBy: trackByCategory"
+          (click)="filterByCategory(category.name)"
+        >
+          <div class="category-icon">
+            <i [class]="category.icon"></i>
+          </div>
+          
+          <div class="category-content">
+            <h3 class="category-title">{{ category.name }}</h3>
+            <p class="category-description">{{ category.description }}</p>
+            <div class="category-stats">
+              <div class="article-count">{{ category.articleCount }} articles</div>
+              <div class="last-updated">Updated {{ category.lastUpdated }}</div>
+            </div>
+          </div>
+          
+          <div class="category-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <div class="newsletter-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h2 class="newsletter-title">Stay Informed</h2>
+        <p class="newsletter-subtitle">
+          Get the latest health insights delivered to your inbox weekly
+        </p>
+        <div class="newsletter-form">
+          <input 
+            type="email" 
+            class="newsletter-input" 
+            placeholder="Enter your email address"
+          >
+          <button class="newsletter-btn" (click)="subscribeToNewsletter()">
+            <span>Subscribe</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <p class="newsletter-disclaimer">
+          No spam, unsubscribe at any time. Your privacy is our priority.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Medical Review Section -->
+  <section class="medical-review-section">
+    <div class="container">
+      <div class="review-content">
+        <div class="review-badge">
+          <i class="fas fa-certificate"></i>
+          <span>Medically Reviewed</span>
+        </div>
+        <h2 class="review-title">Expert Medical Review</h2>
+        <p class="review-description">
+          All articles in the HealthTestGenius Health Hub are reviewed by our team of qualified medical professionals, led by Dr. Louis Pirkis, to ensure accuracy and reliability of health information.
+        </p>
+        <div class="review-team">
+          <div class="reviewer">
+            <div class="reviewer-avatar">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="reviewer-info">
+              <h4>Dr. Louis Pirkis</h4>
+              <p>Chief Medical Officer</p>
+              <span>15+ years in diagnostic medicine</span>
+            </div>
+          </div>
+          <div class="reviewer">
+            <div class="reviewer-avatar">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="reviewer-info">
+              <h4>Dr. Sarah Johnson</h4>
+              <p>Senior Medical Advisor</p>
+              <span>Specialist in preventive care</span>
+            </div>
+          </div>
+          <div class="reviewer">
+            <div class="reviewer-avatar">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="reviewer-info">
+              <h4>Dr. Emily Rodriguez</h4>
+              <p>Quality Assurance Director</p>
+              <span>Expert in health communications</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div> 

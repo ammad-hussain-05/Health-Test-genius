@@ -1,0 +1,197 @@
+<!-- dynamic-service.component.html -->
+<div class="min-h-screen bg-gradient-to-br from-blue-800 to-blue-900 pt-20">
+  <div class="container mx-auto px-4 py-12">
+    
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex justify-center items-center h-64">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400"></div>
+      <span class="ml-3 text-blue-100">Loading service details...</span>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="bg-red-50 border border-red-200 rounded-lg p-6 text-center max-w-2xl mx-auto">
+      <div class="text-red-600 text-xl font-semibold mb-2">{{ error }}</div>
+      <p class="text-red-500 mb-4">We couldn't find the service you're looking for.</p>
+      <button 
+        (click)="navigateHome()" 
+        class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-6 py-2 rounded-lg transition-colors font-semibold"
+      >
+        Go Back Home
+      </button>
+    </div>
+
+    <!-- Service Content -->
+    <div *ngIf="serviceData && !loading && !error" class="max-w-6xl mx-auto">
+      
+      <!-- Header Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6" style="color: #1D4ED8;">
+          Find & Book {{ getServiceDisplayName() }}
+        </h1>
+        
+        <!-- Delivery Option Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8" *ngIf="deliveryOptions.length > 0">
+          <button 
+            *ngFor="let option of deliveryOptions"
+            (click)="navigateToSearchResults(option.value)"
+            class="px-8 py-4 rounded-lg font-semibold text-blue-900 transition-all duration-200 transform hover:scale-105 bg-yellow-300 hover:bg-yellow-400"
+          >
+            {{ option.value }} {{ getServiceDisplayName() }}
+          </button>
+        </div>
+
+        <!-- Description -->
+        <p class="text-blue-100 text-lg max-w-4xl mx-auto leading-relaxed">
+          {{ serviceData.description || 'Find the right test for you or your family member. Before booking, it\'s important to understand what this test can tell you and what to look out for when booking one.' }}
+        </p>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="mb-8">
+        <nav class="flex items-center space-x-2 text-yellow-400">
+          <a href="/" class="hover:text-yellow-300 transition-colors underline">Blood Tests</a>
+          <span class="text-blue-200">></span>
+          <span class="text-white" style="color: #1D4ED8;">{{ getServiceDisplayName() }}</span>
+        </nav>
+      </div>
+
+      <!-- Service Details Card -->
+      <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+        <div class="p-8 md:p-12">
+          
+          <!-- Service Information Grid -->
+          <div class="grid md:grid-cols-2 gap-12 mb-12">
+            
+            <!-- Left Column - Service Details -->
+            <div>
+              <h2 class="text-3xl font-bold text-gray-800 mb-6">Service Information</h2>
+              
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div class="bg-blue-100 rounded-full p-3 mr-4">
+                    <i class="fas fa-info-circle h-6 w-6 text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 text-lg mb-2">What This Test Covers</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ serviceData.description || 'Comprehensive health assessment designed to provide valuable insights into your health status.' }}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start">
+                  <div class="bg-green-100 rounded-full p-3 mr-4">
+                    <i class="fas fa-dollar-sign h-6 w-6 text-green-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 text-lg mb-2">Price</h3>
+                    <p class="text-3xl font-bold text-green-600">{{ getFormattedPrice() }}</p>
+                    <p class="text-gray-500 text-sm mt-1">Transparent pricing with no hidden fees</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start">
+                  <div class="bg-purple-100 rounded-full p-3 mr-4">
+                    <i class="fas fa-clock h-6 w-6 text-purple-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 text-lg mb-2">Results Timeline</h3>
+                    <p class="text-gray-600">Results typically available within 24-48 hours</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column - Booking Options -->
+            <div>
+              <h2 class="text-3xl font-bold text-gray-800 mb-6">Choose Your Option</h2>
+              
+              <div class="space-y-4 mb-8">
+                <div 
+                  *ngFor="let option of deliveryOptions" 
+                  class="border-2 rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-lg"
+                  [class.border-blue-500]="selectedDelivery === option.key"
+                  [class.bg-blue-50]="selectedDelivery === option.key"
+                  [class.border-gray-200]="selectedDelivery !== option.key"
+                  [class.hover:border-blue-300]="selectedDelivery !== option.key"
+                  (click)="onDeliveryChange(option.key)"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                      <input 
+                        type="radio" 
+                        [id]="option.key"
+                        [value]="option.key"
+                        [(ngModel)]="selectedDelivery"
+                        class="text-blue-600 focus:ring-blue-500 h-5 w-5"
+                      >
+                      <div class="ml-4">
+                        <label [for]="option.key" class="font-semibold text-gray-800 text-lg cursor-pointer">
+                          {{ option.value }}
+                        </label>
+                        <p class="text-gray-600 text-sm mt-1">
+                          {{ option.value === 'At Home' ? 'Convenient home collection service' : 'Visit our professional clinic' }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="text-2xl">
+                      <i [class]="option.value === 'At Home' ? 'fas fa-home text-blue-600' : 'fas fa-hospital text-green-600'"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="space-y-4">
+                <button 
+                  (click)="bookService()"
+                  class="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+                >
+                  <i class="fas fa-calendar-plus h-6 w-6 mr-2 inline"></i>
+                  Book {{ getServiceDisplayName() }} - {{ getFormattedPrice() }}
+                </button>
+                
+                <button 
+                  (click)="navigateToContact()"
+                  class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 border-2 border-gray-200 hover:border-gray-300"
+                >
+                  <i class="fas fa-question-circle h-6 w-6 mr-2 inline"></i>
+                  Have Questions? Contact Us
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Section -->
+          <div class="border-t border-gray-200 pt-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Why Choose Our Service?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+              <div class="text-center">
+                <div class="bg-blue-100 rounded-full p-6 w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                  <i class="fas fa-check-circle h-10 w-10 text-blue-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 text-xl mb-3">Professional Quality</h3>
+                <p class="text-gray-600">Certified laboratories and qualified healthcare professionals ensure accurate results</p>
+              </div>
+
+              <div class="text-center">
+                <div class="bg-green-100 rounded-full p-6 w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                  <i class="fas fa-tachometer-alt h-10 w-10 text-green-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 text-xl mb-3">Fast Results</h3>
+                <p class="text-gray-600">Quick turnaround times with results delivered securely to your email</p>
+              </div>
+
+              <div class="text-center">
+                <div class="bg-purple-100 rounded-full p-6 w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                  <i class="fas fa-clipboard-check h-10 w-10 text-purple-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 text-xl mb-3">Easy Booking</h3>
+                <p class="text-gray-600">Simple online booking process with flexible appointment scheduling</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

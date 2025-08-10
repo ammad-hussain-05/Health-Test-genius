@@ -1,0 +1,23 @@
+.footer-section h3 {
+  position: relative;
+}
+
+.mb-2 {
+  padding-left: 110px;
+  line-height: 2em;
+}
+
+.footer-section h3::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.footer-section ul li a:hover {
+  transform: translateX(4px);
+  transition: transform 0.3s ease;
+}

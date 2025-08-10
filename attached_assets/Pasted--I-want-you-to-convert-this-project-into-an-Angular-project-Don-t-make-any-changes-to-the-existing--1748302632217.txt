@@ -1,0 +1,158 @@
+"I want you to convert this project into an Angular project. Don’t make any changes to the existing content — everything should remain exactly as it is. Use the same code that’s already built, and just add a few new things to it."
+
+Additions to the frontend:
+Add a section titled “Choose a Health Service” with a beautiful heading.
+Below the heading, create card-style components for each of the following services, with logos and beautiful hover effects:
+
+GP Appointments
+
+Blood Tests
+
+Cancer Checks
+
+Sexual Health
+
+Gynaecology
+
+Travel Vaccinations
+
+MRI | CT Scans
+
+Weight Loss
+
+Physiotherapy
+
+Mental Health
+
+Dentists
+
+Care Homes
+
+Dermatology
+
+Fertility Treatments
+
+Below that, add a section called “Meet Our Partners” that includes different partner logos, such as:
+
+Thriva
+
+Vista
+
+MMH
+
+And many more
+
+After that, create another section titled “How It Works” with a clear heading. Present the following steps in grid box format:
+
+1. Search for your treatment
+Filter your search based on location, price, and service type to find the right solution for you.
+
+2. Compare options
+Find services that suit your symptoms, budget, and location and compare them against each other in minutes.
+
+3. Book your treatment
+Book your service or treatment with our trusted partners and receive results to your phone – it's that simple.
+
+Finally, at the bottom of the site, add a full footer section with good design and include all of the following:
+
+Footer Categories:
+Diagnostic Tests
+
+Men’s Health
+
+Women’s Health
+
+General Health
+
+Sexual Health
+
+Erectile Dysfunction
+
+STI Tests
+
+Female Fertility
+
+Male Fertility
+
+GP Appointments
+
+In Clinic
+
+Virtual Consultation
+
+Popular GP Locations
+
+Medical Scans:
+MRI
+
+CT
+
+Cancer Checks
+
+General Cancer
+
+Bowel Screening
+
+Breast Screening
+
+Lung Screening
+
+Travel Vaccinations:
+Typhoid
+
+Yellow Fever
+
+Malaria
+
+All Vaccines
+
+Destination Guide
+
+Care Homes:
+Dementia Care
+
+Residential Care
+
+Care at Home
+
+Nursing Homes
+
+Retirement Homes
+
+Dentists:
+Find a Dentist
+
+Mental Health:
+At Home Support
+
+In-Person Support
+
+Find a Therapist
+
+Weight Loss:
+Mounjaro
+
+Wegovy
+
+Help & Advice:
+About
+
+FAQs
+
+Health Hub
+
+Contact
+
+User Terms
+
+Sitemap
+
+Dr Louis Pirkis
+
+© Compare Health Tests Ltd. 2025
+
+Note:
+Don’t make any changes to the original project — just set it up properly as an Angular project and add the above sections in order.
+Make sure that padding, margin, height, width — all layout and spacing — are perfectly designed.
+If needed, you may use TailwindCSS for styling, but be sure to deliver a beautiful design.
+

@@ -1,0 +1,432 @@
+<div class="search-results-page">
+  <!-- Header Section -->
+  <div class="results-header">
+    <div class="container">
+      <div class="header-content">
+        <button (click)="onNewSearch()" class="back-btn">
+          <i class="fas fa-arrow-left back-icon"></i>
+          New Search
+        </button>
+        
+        <div class="search-summary">
+          <h1 class="results-title">Search Results</h1>
+          <div class="search-params">
+            <span *ngIf="searchService" class="param-tag">
+              Service: {{ searchService }}
+            </span>
+            <span *ngIf="selectedLocation" class="param-tag">
+              Location: {{ selectedLocation }}
+            </span>
+            <span *ngIf="selectedDeliveryType" class="param-tag">
+              Type: {{ getDeliveryTypeLabel(selectedDeliveryType) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Bar Section -->
+  <div class="search-bar-section">
+    <div class="container">
+      <div class="inline-search-form">
+        
+        <!-- Service Dropdown -->
+        <div class="search-field">
+          <select 
+            [(ngModel)]="newSearchService"
+            (ngModelChange)="onNewServiceChange()"
+            class="search-select">
+            <option value="">Blood Test</option>
+            <option *ngFor="let service of availableServices" [value]="service.value">
+              {{ service.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Sub-service Dropdown -->
+        <div class="search-field">
+          <select 
+            [(ngModel)]="newSearchSubService"
+            class="search-select">
+            <option value="">Male Health</option>
+            <option *ngFor="let subService of availableSubServices" [value]="subService.value">
+              {{ subService.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- At Home / In Clinic Toggle -->
+        <div class="search-field toggle-field">
+          <div class="delivery-toggle">
+            <button 
+              type="button"
+              (click)="newDeliveryType = 'at-home'"
+              [class.active]="newDeliveryType === 'at-home'"
+              class="toggle-btn">
+              At Home
+            </button>
+            <button 
+              type="button"
+              (click)="newDeliveryType = 'in-clinic'"
+              [class.active]="newDeliveryType === 'in-clinic'"
+              class="toggle-btn">
+              In Clinic
+            </button>
+          </div>
+        </div>
+
+        <!-- Location Input -->
+        <div class="search-field location-field">
+          <div class="location-input-wrapper">
+            <input 
+              type="text"
+              [(ngModel)]="newSearchLocation"
+              placeholder="Enter postcode"
+              class="location-input">
+            <button 
+              type="button"
+              (click)="useCurrentLocation()"
+              [disabled]="isLoadingLocation"
+              class="location-btn"
+              title="Use my location">
+              <i *ngIf="!isLoadingLocation" class="fas fa-map-marker-alt location-icon"></i>
+              <div *ngIf="isLoadingLocation" class="loading-spinner-small"></div>
+              <span class="location-text">Use my location</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Find Results Button -->
+        <div class="search-field button-field">
+          <button 
+            type="button"
+            (click)="performNewSearch()"
+            class="find-results-btn">
+            Find results
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="results-content">
+    <div class="container">
+      
+      <!-- Results Header with Filters Toggle -->
+      <div class="results-controls" *ngIf="!isLoading">
+        <div class="results-info">
+          <p class="results-count">
+            {{ totalResults }} result{{ totalResults !== 1 ? 's' : '' }} found
+          </p>
+        </div>
+
+        <div class="controls-right">
+          <!-- Sort Dropdown -->
+          <div class="sort-dropdown">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select" [(ngModel)]="selectedSort" (ngModelChange)="onSortChange()">
+              <option *ngFor="let option of sortOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+
+          <!-- View Toggle Buttons -->
+          <div class="view-toggle-group">
+            <button 
+              class="view-toggle-btn"
+              [class.active]="viewMode === 'list'"
+              (click)="setViewMode('list')">
+              <i class="fas fa-list view-icon"></i>
+              List view
+            </button>
+            <button 
+              class="view-toggle-btn"
+              [class.active]="viewMode === 'map'"
+              (click)="setViewMode('map')">
+              <i class="fas fa-map view-icon"></i>
+              Show in map
+            </button>
+          </div>
+
+          <!-- Filter Toggle (Mobile) -->
+          <button class="filter-toggle" (click)="toggleFilters()">
+            <i class="fas fa-filter filter-icon"></i>
+            Filters
+            <span *ngIf="filtersCount > 0" class="filter-count">{{ filtersCount }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-section">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Searching for the best options...</p>
+      </div>
+
+      <!-- Main Content Grid -->
+      <div *ngIf="!isLoading" class="main-content">
+        
+        <!-- Filters Sidebar -->
+        <div class="filters-sidebar" [class.show-mobile]="showFilters">
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button *ngIf="filtersCount > 0" (click)="clearAllFilters()" class="clear-all-btn">
+              Clear All
+            </button>
+          </div>
+
+          <!-- Active Filters -->
+          <div *ngIf="filtersCount > 0" class="active-filters">
+            <div *ngIf="selectedCategory" class="filter-tag">
+              {{ selectedCategory }}
+              <button (click)="clearFilter('category')" class="remove-filter">×</button>
+            </div>
+            <div *ngIf="selectedProvider" class="filter-tag">
+              {{ selectedProvider }}
+              <button (click)="clearFilter('provider')" class="remove-filter">×</button>
+            </div>
+            <div *ngIf="selectedPriceRange" class="filter-tag">
+              {{ selectedPriceRange }}
+              <button (click)="clearFilter('price')" class="remove-filter">×</button>
+            </div>
+            <div *ngIf="verifiedOnly" class="filter-tag">
+              Verified Only
+              <button (click)="clearFilter('verified')" class="remove-filter">×</button>
+            </div>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-section">
+            <h4>Category</h4>
+            <select [(ngModel)]="selectedCategory" (ngModelChange)="onCategoryChange()">
+              <option value="">All Categories</option>
+              <option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-section">
+            <h4>Price Range</h4>
+            <div class="price-options">
+              <label *ngFor="let range of priceRanges" class="price-option">
+                <input 
+                  type="radio" 
+                  name="priceRange" 
+                  [value]="range.value"
+                  [(ngModel)]="selectedPriceRange"
+                  (ngModelChange)="onPriceRangeChange()">
+                <span>{{ range.label }}</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Provider Filter -->
+          <div class="filter-section">
+            <h4>Provider</h4>
+            <select [(ngModel)]="selectedProvider" (ngModelChange)="onProviderChange()">
+              <option value="">All Providers</option>
+              <option *ngFor="let provider of providers" [value]="provider">
+                {{ provider }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Verified Only Filter -->
+          <div class="filter-section">
+            <label class="checkbox-label">
+              <input 
+                type="checkbox" 
+                [(ngModel)]="verifiedOnly"
+                (ngModelChange)="onVerifiedChange()">
+              <span class="checkmark"></span>
+              Verified providers only
+            </label>
+          </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="results-grid">
+          
+          <!-- List View -->
+          <div *ngIf="viewMode === 'list' && filteredProducts.length > 0" class="products-list">
+            <div *ngFor="let product of filteredProducts" class="product-card">
+              
+              <!-- Product Header -->
+              <div class="product-header">
+                <div class="product-title-section">
+                  <h3 class="product-title">{{ product.title }}</h3>
+                  <span *ngIf="product.verified" class="verified-badge">
+                    <i class="fas fa-check-circle verified-icon"></i>
+                    Verified
+                  </span>
+                </div>
+                <div class="product-price">
+                  {{ formatPrice(product.price) }}
+                </div>
+              </div>
+
+              <!-- Provider Info -->
+              <div class="provider-info">
+                <span class="provider-name">{{ product.providerName }}</span>
+                <span class="category-badge">{{ product.category }}</span>
+              </div>
+
+              <!-- Description -->
+              <p class="product-description">{{ product.description }}</p>
+
+              <!-- Delivery Options -->
+              <div class="delivery-options">
+                <div class="delivery-label">Available:</div>
+                <div class="delivery-badges">
+                  <span *ngFor="let delivery of product.delivery" class="delivery-badge">
+                    {{ delivery }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Location Info -->
+              <div class="location-info">
+                <i class="fas fa-map-marker-alt location-icon"></i>
+                <span class="location-text">{{ product.postcode }}</span>
+              </div>
+
+              <!-- Tags -->
+              <div class="product-tags">
+                <span *ngFor="let tag of product.tags" class="tag">
+                  {{ tag }}
+                </span>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="product-actions">
+                <button (click)="onViewProduct(product)" class="btn-secondary">
+                  View Details
+                </button>
+                <button (click)="onBookProduct(product)" class="btn-primary">
+                  Book Now
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Map View -->
+          <div *ngIf="viewMode === 'map'" class="map-view-container">
+            <div class="map-layout">
+              
+              <!-- Map Container -->
+              <div class="map-container">
+                <div id="map" class="map-element"></div>
+                
+                <!-- Map Controls -->
+                <div class="map-controls">
+                  <button (click)="centerMapOnUser()" class="map-control-btn" title="Center on my location">
+                    <i class="fas fa-crosshairs control-icon"></i>
+                  </button>
+                  <button (click)="fitMapToMarkers()" class="map-control-btn" title="Show all results">
+                    <svg class="control-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Product Cards Sidebar -->
+              <div class="map-sidebar">
+                <div class="map-sidebar-header">
+                  <h3>{{ filteredProducts.length }} result{{ filteredProducts.length !== 1 ? 's' : '' }}</h3>
+                </div>
+                
+                <div class="map-product-list">
+                  <div 
+                    *ngFor="let product of filteredProducts; let i = index" 
+                    class="map-product-card"
+                    [class.highlighted]="selectedProductIndex === i"
+                    (click)="selectProduct(i)"
+                    (mouseenter)="highlightMarker(i)"
+                    (mouseleave)="unhighlightMarker(i)">
+                    
+                    <!-- Product Image -->
+                    <div class="map-product-image">
+                      <img 
+                        [src]="product.imageUrl || '../../../assets/images/anna.jpg'" 
+                        [alt]="product.title"
+                        onerror="this.src='../../../assets/images/anna.jpg'">
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="map-product-info">
+                      <div class="map-product-header">
+                        <h4 class="map-product-title">{{ product.title }}</h4>
+                        <div class="map-product-price">{{ formatPrice(product.price) }}</div>
+                      </div>
+                      
+                      <div class="map-product-provider">
+                        <span class="provider-name">{{ product.providerName }}</span>
+                        <span *ngIf="product.verified" class="verified-badge-small">
+                          <i class="fas fa-check-circle verified-icon-small"></i>
+                          Verified
+                        </span>
+                      </div>
+
+                      <div class="map-product-details">
+                        <div class="delivery-info">
+                          <span *ngFor="let delivery of product.delivery" class="delivery-badge-small">
+                            {{ delivery }}
+                          </span>
+                        </div>
+                        
+                        <div class="location-info-small">
+                          <i class="fas fa-map-marker-alt location-icon-small"></i>
+                          <span>{{ product.postcode }}</span>
+                          <span *ngIf="product.distance" class="distance">{{ product.distance }}mi</span>
+                        </div>
+                      </div>
+
+                      <!-- Action Buttons -->
+                      <div class="map-product-actions">
+                        <button (click)="onViewProduct(product); $event.stopPropagation()" class="btn-secondary-small">
+                          View Details
+                        </button>
+                        <button (click)="onBookProduct(product); $event.stopPropagation()" class="btn-primary-small">
+                          Book now
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- No Results -->
+          <div *ngIf="filteredProducts.length === 0" class="no-results">
+            <div class="no-results-icon">
+              <i class="fas fa-search no-results-svg"></i>
+            </div>
+            <h3 class="no-results-title">No results found</h3>
+            <p class="no-results-text">
+              We couldn't find any services matching your search criteria. 
+              Try adjusting your filters or search terms.
+            </p>
+            <button (click)="clearAllFilters()" class="btn-secondary">
+              Clear Filters
+            </button>
+            <button (click)="onNewSearch()" class="btn-primary">
+              New Search
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

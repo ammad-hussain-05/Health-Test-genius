@@ -1,0 +1,68 @@
+/* Clean Step Cards with Background Images */
+.step-card {
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Background image fallback */
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  border-radius: 0.75rem;
+  z-index: -1;
+}
+
+/* Text styling to match the image */
+.step-card h3 {
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.step-card p {
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  line-height: 1.4;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .step-card {
+    height: 280px;
+    margin-bottom: 1rem;
+  }
+  
+  .step-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .step-card p {
+    font-size: 0.875rem;
+  }
+  
+  .grid.md\\:grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .step-card {
+    height: 260px;
+  }
+  
+  .step-card .absolute.bottom-0 {
+    padding: 1.25rem;
+  }
+}

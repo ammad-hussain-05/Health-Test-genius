@@ -1,0 +1,727 @@
+/*!
+ * Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2023 Fonticons, Inc.
+ */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-solid-900.woff2") format("woff2"),
+       url("../fonts/fa-solid-900.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/fa-regular-400.woff2") format("woff2"),
+       url("../fonts/fa-regular-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/fa-brands-400.woff2") format("woff2"),
+       url("../fonts/fa-brands-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-v4compatibility.woff2") format("woff2"),
+       url("../fonts/fa-v4compatibility.ttf") format("truetype");
+}
+
+/* Base FontAwesome Classes */
+.fa,
+.fas,
+.far,
+.fal,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+/* Solid Icons */
+.fas,
+.fa-solid {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Regular Icons */
+.far,
+.fa-regular {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 400;
+}
+
+/* Brand Icons */
+.fab,
+.fa-brands {
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+/* Backwards compatibility */
+.fa {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Icon Size Classes */
+.fa-xs {
+  font-size: 0.75em;
+  line-height: 0.08333em;
+  vertical-align: 0.125em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+  line-height: 0.07143em;
+  vertical-align: 0.05357em;
+}
+
+.fa-lg {
+  font-size: 1.25em;
+  line-height: 0.05em;
+  vertical-align: -0.075em;
+}
+
+.fa-xl {
+  font-size: 1.5em;
+  line-height: 0.04167em;
+  vertical-align: -0.125em;
+}
+
+.fa-2xl {
+  font-size: 2em;
+  line-height: 0.03125em;
+  vertical-align: -0.1875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+/* Fixed Width */
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+/* Rotation */
+.fa-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.fa-flip-vertical {
+  transform: scaleY(-1);
+}
+
+.fa-flip-both {
+  transform: scale(-1);
+}
+
+/* Animation */
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  animation: fa-spin 1s infinite steps(8);
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Border */
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+/* Pull Left/Right */
+.fa-pull-left {
+  float: left;
+  margin-right: 0.3em;
+}
+
+.fa-pull-right {
+  float: right;
+  margin-left: 0.3em;
+}
+
+/* Stack */
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  line-height: 2em;
+  position: relative;
+  vertical-align: middle;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: auto;
+}
+
+.fa-stack-1x {
+  line-height: inherit;
+}
+
+.fa-stack-2x {
+  font-size: 2em;
+}
+
+/* Inverse */
+.fa-inverse {
+  color: #fff;
+}
+
+/* Common Icons - Add more as needed */
+.fa-home::before {
+  content: "\f015";
+}
+
+.fa-user::before {
+  content: "\f007";
+}
+
+.fa-search::before {
+  content: "\f002";
+}
+
+.fa-user-md::before {
+  content: "\f0f0";
+}
+
+.fa-tint::before {
+  content: "\f043";
+}
+
+.fa-search-plus::before {
+  content: "\f00e";
+}
+
+.fa-venus::before {
+  content: "\f221";
+}
+
+.fa-plane::before {
+  content: "\f072";
+}
+
+.fa-file-medical::before {
+  content: "\f477";
+}
+
+.fa-weight::before {
+  content: "\f496";
+}
+
+.fa-dumbbell::before {
+  content: "\f44b";
+}
+
+.fa-brain::before {
+  content: "\f5dc";
+}
+
+.fa-tooth::before {
+  content: "\f5c9";
+}
+
+.fa-baby::before {
+  content: "\f77c";
+}
+
+.fa-envelope::before {
+  content: "\f0e0";
+}
+
+.fa-phone::before {
+  content: "\f095";
+}
+
+.fa-map-marker-alt::before {
+  content: "\f3c5";
+}
+
+.fa-calendar::before {
+  content: "\f133";
+}
+
+.fa-clock::before {
+  content: "\f017";
+}
+
+.fa-heart::before {
+  content: "\f004";
+}
+
+.fa-star::before {
+  content: "\f005";
+}
+
+.fa-check::before {
+  content: "\f00c";
+}
+
+.fa-times::before {
+  content: "\f00d";
+}
+
+.fa-plus::before {
+  content: "\f067";
+}
+
+.fa-minus::before {
+  content: "\f068";
+}
+
+.fa-arrow-left::before {
+  content: "\f060";
+}
+
+.fa-arrow-right::before {
+  content: "\f061";
+}
+
+.fa-arrow-up::before {
+  content: "\f062";
+}
+
+.fa-arrow-down::before {
+  content: "\f063";
+}
+
+.fa-external-link-alt::before {
+  content: "\f35d";
+}
+
+.fa-download::before {
+  content: "\f019";
+}
+
+.fa-upload::before {
+  content: "\f093";
+}
+
+.fa-edit::before {
+  content: "\f044";
+}
+
+.fa-trash::before {
+  content: "\f1f8";
+}
+
+.fa-save::before {
+  content: "\f0c7";
+}
+
+.fa-print::before {
+  content: "\f02f";
+}
+
+.fa-share::before {
+  content: "\f064";
+}
+
+.fa-shopping-cart::before {
+  content: "\f07a";
+}
+
+.fa-credit-card::before {
+  content: "\f09d";
+}
+
+.fa-money-bill-wave::before {
+  content: "\f53a";
+}
+
+.fa-hospital::before {
+  content: "\f0f8";
+}
+
+.fa-user-md::before {
+  content: "\f0f0";
+}
+
+.fa-stethoscope::before {
+  content: "\f0f1";
+}
+
+.fa-pills::before {
+  content: "\f484";
+}
+
+.fa-syringe::before {
+  content: "\f48e";
+}
+
+.fa-dna::before {
+  content: "\f471";
+}
+
+.fa-microscope::before {
+  content: "\f610";
+}
+
+.fa-x-ray::before {
+  content: "\f497";
+}
+
+.fa-weight::before {
+  content: "\f496";
+}
+
+.fa-heartbeat::before {
+  content: "\f21e";
+}
+
+.fa-eye::before {
+  content: "\f06e";
+}
+
+.fa-brain::before {
+  content: "\f5dc";
+}
+
+.fa-wheelchair::before {
+  content: "\f193";
+}
+
+.fa-ambulance::before {
+  content: "\f0f9";
+}
+
+.fa-first-aid::before {
+  content: "\f479";
+}
+
+/* Location and Map Icons */
+.fa-map::before {
+  content: "\f279";
+}
+
+.fa-map-pin::before {
+  content: "\f276";
+}
+
+.fa-location-arrow::before {
+  content: "\f124";
+}
+
+.fa-compass::before {
+  content: "\f14e";
+}
+
+.fa-globe::before {
+  content: "\f0ac";
+}
+
+/* Social Media Icons */
+.fa-facebook::before {
+  content: "\f09a";
+}
+
+.fa-twitter::before {
+  content: "\f099";
+}
+
+.fa-instagram::before {
+  content: "\f16d";
+}
+
+.fa-linkedin::before {
+  content: "\f08c";
+}
+
+.fa-youtube::before {
+  content: "\f167";
+}
+
+.fa-whatsapp::before {
+  content: "\f232";
+}
+
+/* Utility Classes */
+.fa-muted {
+  opacity: 0.6;
+}
+
+.fa-light {
+  opacity: 0.7;
+}
+
+.fa-primary {
+  color: #3b82f6;
+}
+
+.fa-success {
+  color: #10b981;
+}
+
+.fa-warning {
+  color: #f59e0b;
+}
+
+.fa-danger {
+  color: #ef4444;
+}
+
+.fa-info {
+  color: #06b6d4;
+}
+
+/* Responsive classes */
+@media (max-width: 768px) {
+  .fa-mobile-lg {
+    font-size: 1.5em;
+  }
+  
+  .fa-mobile-xl {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .fa-mobile-sm {
+    font-size: 0.875em;
+  }
+}
+
+/* Additional FontAwesome Icons for Partner Component */
+.fa-flask::before {
+  content: "\f0c3";
+}
+
+.fa-laptop-code::before {
+  content: "\f5fc";
+}
+
+.fa-shield-alt::before {
+  content: "\f3ed";
+}
+
+.fa-cogs::before {
+  content: "\f085";
+}
+
+.fa-chart-line::before {
+  content: "\f201";
+}
+
+.fa-bullhorn::before {
+  content: "\f0a1";
+}
+
+.fa-headset::before {
+  content: "\f590";
+}
+
+.fa-user-tie::before {
+  content: "\f508";
+}
+
+.fa-handshake::before {
+  content: "\f2b5";
+}
+
+.fa-rocket::before {
+  content: "\f135";
+}
+
+.fa-file-alt::before {
+  content: "\f15c";
+}
+
+.fa-check-circle::before {
+  content: "\f058";
+}
+
+.fa-play::before {
+  content: "\f04b";
+}
+
+.fa-chevron-down::before {
+  content: "\f078";
+}
+
+.fa-paper-plane::before {
+  content: "\f1d8";
+}
+
+.fa-spinner::before {
+  content: "\f110";
+}
+
+.fa-comment-alt::before {
+  content: "\f27a";
+}
+
+.fa-list::before {
+  content: "\f03a";
+}
+
+.fa-briefcase::before {
+  content: "\f0b1";
+}
+
+.fa-building::before {
+  content: "\f1ad";
+}
+
+.fa-users::before {
+  content: "\f0c0";
+}
+
+.fa-industry::before {
+  content: "\f275";
+}
+
+.fa-quote-left::before {
+  content: "\f10d";
+}
+
+.fa-tachometer-alt::before {
+  content: "\f3f4";
+}
+
+.fa-clipboard-check::before {
+  content: "\f46c";
+}
+
+.fa-info-circle::before {
+  content: "\f05a";
+}
+
+.fa-dollar-sign::before {
+  content: "\f155";
+}
+
+.fa-calendar-plus::before {
+  content: "\f271";
+}
+
+.fa-question-circle::before {
+  content: "\f059";
+}
+
+/* Rotation for chevron icons */
+.rotated {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+/* Additional FontAwesome Icons for Mission Component */
+.fa-award::before {
+  content: "\f559";
+}
+
+.fa-medal::before {
+  content: "\f5a2";
+}
+
+.fa-certificate::before {
+  content: "\f0a3";
+}
+
+.fa-universal-access::before {
+  content: "\f29a";
+}
+
+.fa-chevron-left::before {
+  content: "\f053";
+}
+
+.fa-chevron-right::before {
+  content: "\f054";
+}
+
+.fa-linkedin::before {
+  content: "\f08c";
+}
+
+.fa-map-marker-alt::before {
+  content: "\f3c5";
+}
+
+.fa-fa-spin {
+  animation: fa-spin 2s infinite linear;
+} 

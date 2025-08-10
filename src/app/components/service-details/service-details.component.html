@@ -1,0 +1,177 @@
+<div class="service-details-page">
+  <!-- Header Section -->
+  <div class="service-header">
+    <div class="container">
+      <div class="header-content">
+        <button (click)="onBackToSearch()" class="back-btn">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Search
+        </button>
+        
+        <div class="service-info" *ngIf="serviceData">
+          <h1 class="service-title">{{ serviceData.name }}</h1>
+          <p class="service-description">{{ serviceData.description }}</p>
+          <div class="service-meta">
+            <span class="price-range">{{ serviceData.price }}</span>
+            <span class="availability">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Available Today
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters Section -->
+  <div class="filters-section">
+    <div class="container">
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label class="filter-label">Service Type</label>
+          <select [(ngModel)]="selectedDeliveryType" class="filter-select">
+            <option *ngFor="let type of deliveryTypes" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Sort By</label>
+          <select [(ngModel)]="selectedSortBy" class="filter-select">
+            <option *ngFor="let option of sortOptions" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Location</label>
+          <input 
+            type="text" 
+            [(ngModel)]="selectedLocation"
+            placeholder="Enter postcode or area"
+            class="filter-input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="results-section">
+    <div class="container">
+      
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-section">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Finding the best providers for you...</p>
+      </div>
+
+      <!-- Provider Results -->
+      <div *ngIf="!isLoading" class="providers-container">
+        <div class="results-header">
+          <h2 class="results-title">
+            {{ getFilteredProviders().length }} provider{{ getFilteredProviders().length !== 1 ? 's' : '' }} available
+          </h2>
+        </div>
+
+        <div class="providers-list">
+          <div *ngFor="let provider of getFilteredProviders()" class="provider-card">
+            
+            <!-- Provider Header -->
+            <div class="provider-header">
+              <div class="provider-info">
+                <h3 class="provider-name">{{ provider.name }}</h3>
+                <div class="provider-location">
+                  <svg class="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span>{{ provider.location }}</span>
+                  <span class="distance">{{ provider.distance }}</span>
+                </div>
+              </div>
+              
+              <div class="provider-pricing">
+                <div class="price-container">
+                  <span class="current-price">{{ provider.price }}</span>
+                  <span *ngIf="provider.originalPrice" class="original-price">{{ provider.originalPrice }}</span>
+                </div>
+                <span *ngIf="provider.discount" class="discount-badge">{{ provider.discount }}</span>
+              </div>
+            </div>
+
+            <!-- Rating & Reviews -->
+            <div class="provider-rating">
+              <div class="stars">
+                <span *ngFor="let star of getStarArray(provider.rating)" 
+                      [class.filled]="star" 
+                      class="star">★</span>
+              </div>
+              <span class="rating-text">{{ provider.rating }} ({{ provider.reviews }} reviews)</span>
+            </div>
+
+            <!-- Features -->
+            <div class="provider-features">
+              <span *ngFor="let feature of provider.features" class="feature-tag">
+                {{ feature }}
+              </span>
+            </div>
+
+            <!-- Delivery Options -->
+            <div class="delivery-options">
+              <span class="delivery-label">Available:</span>
+              <div class="delivery-tags">
+                <span *ngFor="let option of provider.deliveryOptions" class="delivery-tag">
+                  {{ option }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="availability-section">
+              <span class="availability-label">Next Available:</span>
+              <div class="availability-options">
+                <button *ngFor="let slot of provider.availability" class="availability-btn">
+                  {{ slot }}
+                </button>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="provider-actions">
+              <button class="btn-secondary">
+                View Details
+              </button>
+              <button (click)="onBookProvider(provider)" class="btn-primary">
+                Book Now
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- No Results -->
+      <div *ngIf="!isLoading && getFilteredProviders().length === 0" class="no-results">
+        <div class="no-results-icon">
+          <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3 class="no-results-title">No providers found</h3>
+        <p class="no-results-text">
+          Try adjusting your filters or search in a different area.
+        </p>
+        <button (click)="selectedDeliveryType = 'all'" class="btn-primary">
+          Clear Filters
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div> 

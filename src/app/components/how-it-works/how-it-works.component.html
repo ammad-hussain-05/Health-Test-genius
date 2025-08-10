@@ -1,0 +1,34 @@
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        How It Works
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Getting the healthcare you need is simple with our streamlined process
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div 
+        *ngFor="let step of steps" 
+        class="step-card relative overflow-hidden rounded-xl h-80 group cursor-pointer transition-all duration-300 hover:transform hover:scale-102 hover:shadow-xl"
+        [style.background-image]="'url(' + step.backgroundImage + ')'"
+        style="background-size: cover; background-position: center; background-repeat: no-repeat;"
+      >
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-all duration-300"></div>
+        
+        <!-- Content positioned at bottom left -->
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+          <h3 class="text-xl font-bold mb-2 leading-tight">
+            {{ step.title }}
+          </h3>
+          <p class="text-sm text-gray-200 leading-relaxed opacity-90">
+            {{ step.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

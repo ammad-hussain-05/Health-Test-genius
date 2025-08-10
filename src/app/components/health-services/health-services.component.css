@@ -1,0 +1,91 @@
+.service-card {
+  @apply transform hover:-translate-y-1;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Classic Service Button Styling */
+.service-learn-btn {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, #3b82f6, #2563eb);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+.service-learn-btn:hover {
+  border-color: #1d4ed8;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(45deg, #2563eb, #1d4ed8);
+}
+
+.service-learn-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced card hover effects */
+.service-card:hover .service-learn-btn {
+  transform: translateY(-2px);
+}
+
+/* FontAwesome Icon Debugging */
+.service-card i {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure proper FontAwesome font loading */
+.service-card .fas {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.service-card .far {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 400 !important;
+}
+
+.service-card .fab {
+  font-family: "Font Awesome 6 Brands" !important;
+  font-weight: 400 !important;
+}
+
+/* Icon container styling */
+.service-card .text-4xl {
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Additional debugging - show red border for missing icons */
+.service-card i[class*="fa-"]:not([class*="fa-"]):empty {
+  border: 2px solid red;
+  background: #ffe6e6;
+}
+
+/* Make sure icons are properly sized */
+.service-card i {
+  font-size: inherit;
+  vertical-align: baseline;
+}

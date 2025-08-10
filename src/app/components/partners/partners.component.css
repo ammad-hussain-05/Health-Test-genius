@@ -1,0 +1,127 @@
+/* Meet Our Partners - Exact Scrolling Animation */
+.partners-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 40px 0;
+  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+}
+.tracking-tight{
+  padding: 50px;
+}
+
+.partners-marquee-track {
+  display: flex;
+  animation: partners-scroll 45s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+.partner-badge {
+  min-width: 280px;
+  height: 120px;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  transition: left 0.8s ease;
+}
+
+.partner-badge:hover::before {
+  left: 100%;
+}
+
+.partner-badge:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Partner Logo Image Styling */
+.partner-logo {
+  max-height: 64px;
+  max-width: 200px;
+  filter: grayscale(20%) brightness(0.9);
+  transition: all 0.3s ease;
+}
+
+.partner-badge:hover .partner-logo {
+  filter: grayscale(0%) brightness(1) saturate(1.1);
+  transform: scale(1.1);
+}
+
+.fallback-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+@keyframes partners-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.partners-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Testimonials Enhanced */
+.testimonial-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  min-height: 140px;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  border-color: #e2e8f0;
+}
+
+/* Profile image and header styling */
+.testimonial-card img {
+  flex-shrink: 0;
+}
+
+.testimonial-card h4 {
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Review text styling */
+.testimonial-card p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Stars styling */
+.testimonial-card .flex.text-yellow-400 {
+  gap: 1px;
+}
+
+/* Clean grid layout for 4 cards */
+@media (max-width: 1024px) {
+  .grid.lg\\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .grid.lg\\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
